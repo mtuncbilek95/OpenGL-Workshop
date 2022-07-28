@@ -54,6 +54,16 @@ void ShaderProgram::UseProgram()
 	glUseProgram(ProgramId);
 }
 
+int ShaderProgram::ColorLocation()
+{
+	return glGetUniformLocation(ProgramId, "UniformColor");
+}
+
+void ShaderProgram::Uniform(float value)
+{
+	glUniform4f(ColorLocation(), 0.0f, value, 0.0f, 1.0f);
+}
+
 std::string ShaderProgram::CatchFile(const char* FileName)
 {
 	std::ifstream file(FileName);

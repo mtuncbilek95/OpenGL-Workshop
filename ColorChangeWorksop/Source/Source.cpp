@@ -112,8 +112,12 @@ int main(int argumentCount, char** argumentValue)
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		float Timer = glfwGetTime();
+		float Color = ((sin(Timer) / 2.0f) + 0.5f);
+
 		//Use Program and bind Vertex Array Object.
 		MainProgram->UseProgram();
+		MainProgram->Uniform(Color);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 

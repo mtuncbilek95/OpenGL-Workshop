@@ -23,6 +23,9 @@ public:
 	void LinkProgram();
 	void UseProgram();
 
+	int ColorLocation();
+	void Uniform(float value);
+
 private:
 
 	//This is a function for transfering the glsl data to Shader.
