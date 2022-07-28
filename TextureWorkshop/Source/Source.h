@@ -8,13 +8,14 @@
 
 unsigned int VBO, VAO, EBO;
 
-unsigned int Textures;
+unsigned int Texture;
 
 float vertices[] = {
     // positions          // colors           // texture coords
-     0.0f,  0.4f, 0.0f,   1.0f, 0.0f, 0.0f,   0.5f, 0.5f,   // top middle
-     0.5f, -0.4f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-    -0.5f, -0.4f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 };
 
 unsigned int indices[] = {

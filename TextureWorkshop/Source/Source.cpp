@@ -42,17 +42,17 @@ void CreateBuffers()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(sizeof(float) * 3));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(sizeof(float) * 6));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 6));
 	glEnableVertexAttribArray(2);
 }
 void CreateTextures()
 {
-	glGenTextures(1, &Textures);
-	glBindTexture(GL_TEXTURE_2D, Textures);
+	glGenTextures(1, &Texture);
+	glBindTexture(GL_TEXTURE_2D, Texture);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -62,26 +62,19 @@ void CreateTextures()
 
 	int width, height, nrChannels;
 	unsigned char* data;
-	try
+
+	data = stbi_load("./Textures/Wall.jpg", &width, &height, &nrChannels, 0);
+
+	if (data)
 	{
-		data = stbi_load("./Textures/Wall.jpg", &width, &height, &nrChannels, 0);
-		
-		if (data)
-		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_INT, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-		else
-		{
-			printf("Failed to load texture!");
-		}
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_INT, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	catch (const std::exception& hata)
+	else
 	{
-		printf("Failed to initialize data!");
+		printf("Failed to load texture!");
 	}
-	
-	
+	stbi_image_free(data);
 }
 #pragma endregion
 
@@ -117,6 +110,7 @@ int main(int argumentCount, char** argumentValue)
 	}
 
 	glfwMakeContextCurrent(MainWindow);
+	glfwSetFramebufferSizeCallback(MainWindow, FrameBufferSize);
 
 	//Check if GLAD has been initialized.
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -126,7 +120,7 @@ int main(int argumentCount, char** argumentValue)
 	}
 
 	//Declaring the Rendering Viewport to GLFW.
-	glfwSetFramebufferSizeCallback(MainWindow, FrameBufferSize);
+	
 
 	//Initialize Shader.
 	ShaderProgram* MainProgram = new ShaderProgram();
@@ -155,13 +149,12 @@ int main(int argumentCount, char** argumentValue)
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBindTexture(GL_TEXTURE_2D, Textures);
+		glBindTexture(GL_TEXTURE_2D, Texture);
 
 		//Use Program and bind Vertex Array Object.
 		MainProgram->UseProgram();
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, GL_UNSIGNED_INT, 3);
-
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		/*
 		* GL_FILL makes the Polygon Mode Normal but GL_LINE makes it wire.
