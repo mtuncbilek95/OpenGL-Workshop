@@ -110,7 +110,7 @@ int main(int argumentCount, char** argumentValue)
 	}
 
 	glfwMakeContextCurrent(MainWindow);
-	glfwSetFramebufferSizeCallback(MainWindow, FrameBufferSize);
+	glfwSetFramebufferSizeCallback(MainWindow, FrameBufferSize);""
 
 	//Check if GLAD has been initialized.
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
