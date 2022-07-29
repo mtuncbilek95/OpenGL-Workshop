@@ -2,23 +2,34 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "../Image Library/stb_image.h"
+#include "Core.h"
+#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 
 #define WIDTH 800
 #define HEIGHT 800
 
-unsigned int VBO, VAO, EBO;
+uint VBO, VAO, EBO;
+uint Texture;
 
-unsigned int Texture;
-
-float vertices[] = {
-    // positions          // colors           // texture coords
-     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+struct VertexData
+{
+	glm::vec3 Pos;
+	glm::vec3 Color;
+	glm::vec2 TexCoord;
 };
 
-unsigned int indices[] = {
-       0, 1, 3, // first triangle
-       1, 2, 3  // second triangle
+VertexData Vertices[] = {
+	{{ 0.5f,  0.4f, 0.0f},	{1.0f, 0.0f, 0.0f},	{1.0f, 1.0f}},
+	{{ 0.5f, -0.4f, 0.0f},	{0.0f, 1.0f, 0.0f},	{1.0f, 0.0f}},
+	{{-0.5f, -0.4f, 0.0f},	{0.0f, 0.0f, 1.0f},	{0.0f, 0.0f}},
+	{{-0.5f,  0.4f, 0.0f},	{1.0f, 1.0f, 0.0f},	{0.0f, 1.0f}},
 };
+
+uint Indices[] = {
+	   0, 1, 3, // first triangle
+	   1, 2, 3  // second triangle
+};
+
+
+

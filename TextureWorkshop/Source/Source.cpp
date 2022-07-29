@@ -37,23 +37,27 @@ void CreateBuffers()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), &Vertices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), &Indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, SIZE_FLOAT * 8, (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 3));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, SIZE_FLOAT * 8, (void*)(SIZE_FLOAT * 3));
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 6));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, SIZE_FLOAT * 8, (void*)(SIZE_FLOAT * 6));
 	glEnableVertexAttribArray(2);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 void CreateTextures()
 {
 	glGenTextures(1, &Texture);
 	glBindTexture(GL_TEXTURE_2D, Texture);
-
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -61,13 +65,13 @@ void CreateTextures()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height, nrChannels;
-	unsigned char* data;
+	Byte* data;
 
-	data = stbi_load("./Textures/Wall.jpg", &width, &height, &nrChannels, 0);
+	data = stbi_load("./Textures/Container.jpg", &width, &height, &nrChannels, 0);
 
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_INT, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -80,28 +84,28 @@ void CreateTextures()
 
 int main(int argumentCount, char** argumentValue)
 {
-	//Check if GLFW has been initialized.
+	// Check if GLFW has been initialized.
 	if (!glfwInit())
 	{
 		printf("GLFW has not been initialized.");
 		return 1;
 	}
-	//Version selection OpenGL 4.6
+	// Version selection OpenGL 4.6
 	glfwInitHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwInitHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-
-	//Core profile configuration
+	Vector3d A = Vector3d(1,2,3);
+	// Core profile configuration
 	glfwInitHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+	
 	/*
-	* The code below is needed if the code runs on Mac OSX.
-	* glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	*  The code below is needed if the code runs on Mac OSX.
+	*  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	*/
 
-	//Initilalize the window.
+	// Initilalize the window.
 	GLFWwindow* MainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Triangle Window", NULL, NULL);
 
-	//Check if window has been initialized.
+	// Check if window has been initialized.
 	if (!MainWindow)
 	{
 		printf("Window initialization has failed!");
@@ -110,58 +114,58 @@ int main(int argumentCount, char** argumentValue)
 	}
 
 	glfwMakeContextCurrent(MainWindow);
-	glfwSetFramebufferSizeCallback(MainWindow, FrameBufferSize);""
 
-	//Check if GLAD has been initialized.
+	// Declaring the Rendering Viewport to GLFW.
+	glfwSetFramebufferSizeCallback(MainWindow, FrameBufferSize);
+
+	// Check if GLAD has been initialized.
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		printf("GLAD initialization has failed!");
 		return 1;
 	}
 
-	//Declaring the Rendering Viewport to GLFW.
-	
-
-	//Initialize Shader.
+	// Initialize Shader.
 	ShaderProgram* MainProgram = new ShaderProgram();
 
-	//Attach Vertex and Fragment Shader.
+	// Attach Vertex and Fragment Shader.
 	MainProgram->AttachShader("./GLSL/VertexShader.glsl", GL_VERTEX_SHADER);
 	MainProgram->AttachShader("./GLSL/FragmentShader.glsl", GL_FRAGMENT_SHADER);
 
-	//Link Shader.
+	// Link Shader.
 	MainProgram->LinkProgram();
 
-	//Create shader buffers.
+	// Create shader buffers.
 	CreateBuffers();
 	CreateTextures();
 
 	while (!glfwWindowShouldClose(MainWindow))
 	{
 		/*
-		* First process input, secondly refresh screen, then use shader in order to see the result.
+		*  First process input, secondly refresh screen, then use shader in order to see the result.
 		*/
 
-		//Input function
+		// Input function
 		ProcessInput(MainWindow);
 
-		//Clear the screen and print a color;
+		// Clear the screen and print a color;
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		// 
 		glBindTexture(GL_TEXTURE_2D, Texture);
 
-		//Use Program and bind Vertex Array Object.
+		// Use Program and bind Vertex Array Object.
 		MainProgram->UseProgram();
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		/*
-		* GL_FILL makes the Polygon Mode Normal but GL_LINE makes it wire.
+		*  GL_FILL makes the Polygon Mode Normal but GL_LINE makes it wire.
 		*/
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		//Continuously draw images and check for all inputs.
+		// Continuously draw images and check for all inputs.
 		glfwSwapBuffers(MainWindow);
 		glfwPollEvents();
 	}
