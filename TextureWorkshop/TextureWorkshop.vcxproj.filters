@@ -32,9 +32,6 @@
     <ClInclude Include="Image Library\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GLSL\FragmentShader.glsl" />

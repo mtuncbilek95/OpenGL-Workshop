@@ -42,11 +42,11 @@ void CreateBuffers()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), &Indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, SIZE_FLOAT * 8, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, SIZE_FLOAT * 8, (void*)(SIZE_FLOAT * 3));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, SIZE_FLOAT * 8, (void*)(SIZE_FLOAT * 6));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 6));
 	glEnableVertexAttribArray(2);
 
 	glBindVertexArray(0);
@@ -57,7 +57,7 @@ void CreateTextures()
 {
 	glGenTextures(1, &Texture);
 	glBindTexture(GL_TEXTURE_2D, Texture);
-	
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -65,9 +65,8 @@ void CreateTextures()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height, nrChannels;
-	Byte* data;
 
-	data = stbi_load("./Textures/Container.jpg", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load("./Textures/Container.jpg", &width, &height, &nrChannels, 0);
 
 	if (data)
 	{
@@ -93,10 +92,10 @@ int main(int argumentCount, char** argumentValue)
 	// Version selection OpenGL 4.6
 	glfwInitHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwInitHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-	Vector3d A = Vector3d(1,2,3);
+
 	// Core profile configuration
 	glfwInitHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	
+
 	/*
 	*  The code below is needed if the code runs on Mac OSX.
 	*  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -163,7 +162,7 @@ int main(int argumentCount, char** argumentValue)
 		/*
 		*  GL_FILL makes the Polygon Mode Normal but GL_LINE makes it wire.
 		*/
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		// Continuously draw images and check for all inputs.
 		glfwSwapBuffers(MainWindow);
