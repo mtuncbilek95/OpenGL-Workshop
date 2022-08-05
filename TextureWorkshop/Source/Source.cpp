@@ -162,7 +162,7 @@ int main(int argumentCount, char** argumentValue)
 		/*
 		*  GL_FILL makes the Polygon Mode Normal but GL_LINE makes it wire.
 		*/
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		// Continuously draw images and check for all inputs.
 		glfwSwapBuffers(MainWindow);
