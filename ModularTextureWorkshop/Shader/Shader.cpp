@@ -2,15 +2,15 @@
 
 ShaderProgram::ShaderProgram()
 {
-
+	ProgramId = glCreateProgram();
 }
 
 ShaderProgram::~ShaderProgram()
 {
-
+	glDeleteProgram(ProgramId);
 }
 
-void ShaderProgram::AttachShader(const char* FileSource,const ShaderType Shader)
+void ShaderProgram::AttachShader(const char* FileSource, const ShaderType Shader)
 {
 	uint32 ShaderType{};
 
@@ -33,24 +33,47 @@ void ShaderProgram::AttachShader(const char* FileSource,const ShaderType Shader)
 
 	glCompileShader(ProgramId);
 	glGetShaderiv(ShaderType, GL_COMPILE_STATUS, &bIsCompiled);
+
 	if (!bIsCompiled)
 	{
 		glGetShaderInfoLog(ShaderType, sizeof(log), 0, log);
-		printf("Shader Initialization Error: %s", log);
+		printf("Shader Compile Error: %s", log);
 	}
 }
 
 void ShaderProgram::LinkProgram()
 {
 	glLinkProgram(ProgramId);
+
+	int bIsLinked;
+	char log[512];
+
+	glGetShaderiv(ProgramId, GL_LINK_STATUS, &bIsLinked);
+	if (!bIsLinked)
+	{
+		glGetShaderInfoLog(ProgramId, sizeof(log), 0, log);
+		printf("Shader Link Error: %s", log);
+	}
 }
 
 void ShaderProgram::UseProgram()
 {
-
+	glUseProgram(ProgramId);
 }
 
 std::string ShaderProgram::CatchFile(const char* FileName)
 {
+	std::ifstream file(FileName);
 
+	std::string data;
+
+	if (file.is_open())
+	{
+		char read;
+		while ((read = file.get()) != EOF)
+		{
+			data += read;
+		}
+	}
+	return data;
 }
