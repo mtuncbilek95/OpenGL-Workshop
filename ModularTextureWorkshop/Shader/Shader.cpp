@@ -10,16 +10,16 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(ProgramId);
 }
 
-void ShaderProgram::AttachShader(const char* FileSource, const ShaderType Shader)
+void ShaderProgram::AttachShader(const char* FileSource, const ShaderHandle Shader)
 {
 	uint32 ShaderType{};
 
 	switch (Shader)
 	{
-	case ShaderType::VertexShader:
+	case ShaderHandle::VertexShader:
 		ShaderType = glCreateShader(GL_VERTEX_SHADER);
 		break;
-	case ShaderType::FragmentShader:
+	case ShaderHandle::FragmentShader:
 		ShaderType = glCreateShader(GL_FRAGMENT_SHADER);
 		break;
 	}

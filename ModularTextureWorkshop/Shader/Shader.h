@@ -10,7 +10,7 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 
-	void AttachShader(const char* FileSource, const ShaderType Shader);
+	void AttachShader(const char* FileSource, const ShaderHandle Shader);
 	void LinkProgram();
 	void UseProgram();
 

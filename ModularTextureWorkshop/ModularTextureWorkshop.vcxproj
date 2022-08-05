@@ -147,11 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Buffer\Buffer.cpp" />
     <ClCompile Include="Shader\Shader.cpp" />
     <ClCompile Include="Source\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer\Buffer.h" />
+    <ClInclude Include="Buffer\BufferInfo.h" />
     <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Core\Vector.h" />
     <ClInclude Include="Shader\ShaderInfo.h" />
     <ClInclude Include="Shader\Shader.h" />
   </ItemGroup>

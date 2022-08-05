@@ -12,7 +12,7 @@
 #include <string>
 #include <fstream>
 
-enum class ShaderType
+enum class ShaderHandle
 {
 	VertexShader,
 	FragmentShader
