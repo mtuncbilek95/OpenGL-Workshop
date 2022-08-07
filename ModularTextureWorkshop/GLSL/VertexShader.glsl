@@ -12,5 +12,4 @@ void main()
 	gl_Position = vec4(Pos, 1.0f);
 	UniColor = Color;
 	TexCoord = TexCoordinates; 
-
 }

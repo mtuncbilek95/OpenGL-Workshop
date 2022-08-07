@@ -10,21 +10,21 @@ enum class BufferUsage
 
 enum class BufferType 
 {
+	ArrayObject,
 	ArrayBuffer,
 	ElementBuffer
 };
 
 enum class VertexInputDataType
 {
-	Float0,
 	Float1,
 	Float2,
-	Float3
+	Float3,
+	Float4
 };
 
-struct BufferData
+enum class ObjectType
 {
-	uint32	VertexArrayObject;
-	uint32	VertexBufferObject;
-	uint32	ElementBufferObject;
+	ArrayObject,
+	BufferObject
 };

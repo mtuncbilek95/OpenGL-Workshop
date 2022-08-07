@@ -12,9 +12,10 @@
 #include <string>
 #include <fstream>
 
-enum class ShaderHandle
+enum class ShaderType
 {
 	VertexShader,
 	FragmentShader
 };
+
 #endif // !SHADERINFO_H

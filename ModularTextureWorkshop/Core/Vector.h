@@ -59,11 +59,6 @@ struct Vector3D
 		return Vector3D((Vec1.Y * Vec2.Z - Vec1.Z * Vec2.Y), (Vec1.X * Vec2.Z - Vec1.Z * Vec2.X),
 			(Vec1.X * Vec2.Y - Vec1.Y * Vec2.X));
 	}
-	
-	static constexpr uint8 Num()
-	{
-		return 3;
-	}
 
 	// Vector3 + Vector3. Each element sums with the other vector's related element.
 	Vector3D operator+(Vector3D &Other) const
@@ -138,11 +133,6 @@ struct Vector2D
 	static float CrossProduct(Vector2D& Vec1, Vector2D& Vec2)
 	{
 		return Vec1.X * Vec2.Y - Vec1.Y * Vec2.X;
-	}
-
-	static constexpr uint8 Num()
-	{
-		return 2;
 	}
 
 	// Vector2 + Vector2. Each element sums with the other vector's related element.

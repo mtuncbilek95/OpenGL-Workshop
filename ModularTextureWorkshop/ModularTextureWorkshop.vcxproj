@@ -156,6 +156,7 @@
     <ClInclude Include="Buffer\BufferInfo.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\Vector.h" />
+    <ClInclude Include="InputLayout\InputLayout.h" />
     <ClInclude Include="Shader\ShaderInfo.h" />
     <ClInclude Include="Shader\Shader.h" />
   </ItemGroup>

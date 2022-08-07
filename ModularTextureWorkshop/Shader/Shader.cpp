@@ -10,33 +10,33 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(ProgramId);
 }
 
-void ShaderProgram::AttachShader(const char* FileSource, const ShaderHandle Shader)
+void ShaderProgram::AttachShader(const char* FileSource, const ShaderType Shader)
 {
-	uint32 ShaderType{};
+	uint32 ShaderHandle{};
 
 	switch (Shader)
 	{
-	case ShaderHandle::VertexShader:
-		ShaderType = glCreateShader(GL_VERTEX_SHADER);
+	case ShaderType::VertexShader:
+		ShaderHandle = glCreateShader(GL_VERTEX_SHADER);
 		break;
-	case ShaderHandle::FragmentShader:
-		ShaderType = glCreateShader(GL_FRAGMENT_SHADER);
+	case ShaderType::FragmentShader:
+		ShaderHandle = glCreateShader(GL_FRAGMENT_SHADER);
 		break;
 	}
 
 	std::string Location = CatchFile(FileSource);
 	const char* SourceCode = &Location[0];
-	glShaderSource(ShaderType, 1, &SourceCode, NULL);
+	glShaderSource(ShaderHandle, 1, &SourceCode, NULL);
 
 	int bIsCompiled;
 	char log[512];
 
 	glCompileShader(ProgramId);
-	glGetShaderiv(ShaderType, GL_COMPILE_STATUS, &bIsCompiled);
+	glGetShaderiv(ShaderHandle, GL_COMPILE_STATUS, &bIsCompiled);
 
 	if (!bIsCompiled)
 	{
-		glGetShaderInfoLog(ShaderType, sizeof(log), 0, log);
+		glGetShaderInfoLog(ShaderHandle, sizeof(log), 0, log);
 		printf("Shader Compile Error: %s", log);
 	}
 }

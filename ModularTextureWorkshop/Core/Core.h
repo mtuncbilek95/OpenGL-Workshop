@@ -1,5 +1,11 @@
+#ifndef CORE_H
+
+#define CORE_H
+
 #include <stdio.h>
 #include "Vector.h"
+
+#define uint uint32
 
 #define WIDTH	600
 #define HEIGHT	600
@@ -15,18 +21,25 @@ typedef unsigned short     uint16;
 typedef unsigned int       uint32;
 typedef unsigned long long uint64;
 
-
-struct VertexShader
+struct VertexData
 {
 	Vector3 Vertices;
 	Vector3 Colors;
 	Vector2 Textures;
 };
 
-VertexShader Baris[4] = 
+VertexData Vertices[] = 
 {
 	{{ 0.5f,  0.5f, 0.0f},	{1.0f, 0.0f, 0.0f},	{1.0f, 1.0f}},
 	{{ 0.5f, -0.5f, 0.0f},	{0.0f, 1.0f, 0.0f},	{1.0f, 0.0f}},
 	{{-0.5f, -0.5f, 0.0f},	{0.0f, 0.0f, 1.0f},	{0.0f, 0.0f}},
 	{{-0.5f,  0.5f, 0.0f},	{1.0f, 1.0f, 0.0f},	{0.0f, 1.0f}}
+};
+
+uint Indices[] = 
+{
+	0,1,3,
+	1,2,3
 }
+
+#endif	//! CORE_H

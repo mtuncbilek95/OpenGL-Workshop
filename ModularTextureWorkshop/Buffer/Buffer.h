@@ -2,23 +2,24 @@
 
 #define BUFFER_H
 
+#include <glad/glad.h>
 #include "BufferInfo.h"
 
-#include <glad/glad.h>
 
 class BufferBase
 {
 public:
-	BufferBase();
-	~BufferBase();
+	BufferBase(BufferType BufferType, BufferUsage BufferDrawType);
+	~BufferBase() = default;
 
+	void UnbindBuffer();
 	void CreateBuffer();
-
+	void GenerateBuffer(uint Count);
+	void BindBuffer();
 private:
-	BufferData Data;
-	
-
-	void OffsetCalculation();
+	uint BufferId;
+	BufferType BufferHandle;
+	BufferUsage BufferDrawHandle;
 };
 
 #endif //	!BUFFER_H
