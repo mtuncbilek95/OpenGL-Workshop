@@ -147,22 +147,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Buffer\Buffer.cpp" />
-    <ClCompile Include="Shader\Shader.cpp" />
+    <ClCompile Include="Engine\Buffer\Buffer.cpp" />
+    <ClCompile Include="Engine\Shader\Shader.cpp" />
     <ClCompile Include="Source\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer\Buffer.h" />
-    <ClInclude Include="Buffer\BufferInfo.h" />
-    <ClInclude Include="Core\Core.h" />
-    <ClInclude Include="Core\Vector.h" />
-    <ClInclude Include="InputLayout\InputLayout.h" />
-    <ClInclude Include="Shader\ShaderInfo.h" />
-    <ClInclude Include="Shader\Shader.h" />
+    <ClInclude Include="Engine\Buffer\Buffer.h" />
+    <ClInclude Include="Engine\Buffer\BufferInfo.h" />
+    <ClInclude Include="Engine\Core\Core.h" />
+    <ClInclude Include="Engine\Core\InputValues.h" />
+    <ClInclude Include="Engine\Core\Vector.h" />
+    <ClInclude Include="Engine\InputLayout\InputLayout.h" />
+    <ClInclude Include="Engine\InputLayout\InputLayoutInfo.h" />
+    <ClInclude Include="Engine\Shader\Shader.h" />
+    <ClInclude Include="Engine\Shader\ShaderInfo.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GLSL\FragmentShader.glsl" />
-    <None Include="GLSL\VertexShader.glsl" />
+    <Folder Include="Engine" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\GLSL\FragmentShader.glsl" />
+    <None Include="Engine\GLSL\VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

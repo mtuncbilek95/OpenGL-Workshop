@@ -1,10 +1,9 @@
 #include "Buffer.h"
 
-BufferBase::BufferBase(BufferType BufferType, BufferUsage BufferDrawType)
+BufferBase::BufferBase(const void* InputData, BufferType BufferType)
 {
 	BufferHandle = BufferType;
-	BufferDrawHandle = BufferDrawType;
-
+	BufferData = InputData;
 }
 
 void BufferBase::UnbindBuffer()
@@ -26,11 +25,10 @@ void BufferBase::UnbindBuffer()
 	}
 }
 
-void BufferBase::CreateBuffer()
+void BufferBase::CreateBuffer(BufferUsage BufferDrawType)
 {
 	uint BufferType = 0;
 	uint DrawType = 0;
-
 	switch (BufferHandle)
 	{
 	case BufferType::ArrayBuffer:
@@ -44,7 +42,7 @@ void BufferBase::CreateBuffer()
 		break;
 	}
 
-	switch (BufferDrawHandle)
+	switch (BufferDrawType)
 	{
 	case BufferUsage::StaticDraw:
 		DrawType = GL_STATIC_DRAW;
@@ -56,7 +54,7 @@ void BufferBase::CreateBuffer()
 		DrawType = 0;
 		break;
 	}
-	glBufferData(BufferType, sizeof(Vertices), &Vertices, DrawType);
+	glBufferData(BufferType, sizeof(BufferData), &BufferData, DrawType);
 }
 
 void BufferBase::GenerateBuffer(const uint Count)

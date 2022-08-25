@@ -15,9 +15,9 @@ public:
 	void UseProgram();
 
 protected:
-
 	uint32 ProgramId{};
 	std::string CatchFile(const char* FileName);
+	
 };
 
 

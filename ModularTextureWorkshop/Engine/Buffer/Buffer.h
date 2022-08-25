@@ -9,15 +9,18 @@
 class BufferBase
 {
 public:
-	BufferBase(BufferType BufferType, BufferUsage BufferDrawType);
+	BufferBase(const void* InputData, BufferType BufferType);
 	~BufferBase() = default;
 
 	void UnbindBuffer();
-	void CreateBuffer();
+	void CreateBuffer(BufferUsage BufferDrawType);
 	void GenerateBuffer(uint Count);
 	void BindBuffer();
 private:
 	uint BufferId;
+	
+	const void* BufferData;
+	
 	BufferType BufferHandle;
 	BufferUsage BufferDrawHandle;
 };

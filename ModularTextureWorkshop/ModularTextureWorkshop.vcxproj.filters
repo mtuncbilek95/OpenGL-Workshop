@@ -18,38 +18,44 @@
     <ClCompile Include="Source\Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader\Shader.cpp">
+    <ClCompile Include="Engine\Buffer\Buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Buffer\Buffer.cpp">
+    <ClCompile Include="Engine\Shader\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Core.h">
+    <ClInclude Include="Engine\Buffer\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader\Shader.h">
+    <ClInclude Include="Engine\Buffer\BufferInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader\ShaderInfo.h">
+    <ClInclude Include="Engine\Core\Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Buffer\Buffer.h">
+    <ClInclude Include="Engine\Core\InputValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Buffer\BufferInfo.h">
+    <ClInclude Include="Engine\Core\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Vector.h">
+    <ClInclude Include="Engine\InputLayout\InputLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputLayout\InputLayout.h">
+    <ClInclude Include="Engine\Shader\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Shader\ShaderInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\InputLayout\InputLayoutInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GLSL\VertexShader.glsl" />
-    <None Include="GLSL\FragmentShader.glsl" />
+    <None Include="Engine\GLSL\FragmentShader.glsl" />
+    <None Include="Engine\GLSL\VertexShader.glsl" />
   </ItemGroup>
 </Project>

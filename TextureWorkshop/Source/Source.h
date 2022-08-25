@@ -14,16 +14,15 @@ unsigned int Texture;
 
 struct VertexData
 {
-	glm::vec3 Pos;
-	glm::vec3 Color;
+	glm::vec2 Pos;
 	glm::vec2 TexCoord; 
 };
 
 VertexData Vertices[] = {
-	{{ 0.5f,  0.5f, 0.0f},	{1.0f, 0.0f, 0.0f},	{1.0f, 1.0f}},
-	{{ 0.5f, -0.5f, 0.0f},	{0.0f, 1.0f, 0.0f},	{1.0f, 0.0f}},
-	{{-0.5f, -0.5f, 0.0f},	{0.0f, 0.0f, 1.0f},	{0.0f, 0.0f}},
-	{{-0.5f,  0.5f, 0.0f},	{1.0f, 1.0f, 0.0f},	{0.0f, 1.0f}}
+	{{ 0.5f,  0.5f},	{1.0f, 1.0f}},
+	{{ 0.5f, -0.5f},	{1.0f, 0.0f}},
+	{{-0.5f, -0.5f},	{0.0f, 0.0f}},
+	{{-0.5f,  0.5f},	{0.0f, 1.0f}}
 };
 
 unsigned int Indices[] = {

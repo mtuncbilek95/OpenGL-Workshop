@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BUFFERINFO_H
+
+#define BUFFERINFO_H
 
 #include "../Core/Core.h"
 
@@ -15,16 +17,10 @@ enum class BufferType
 	ElementBuffer
 };
 
-enum class VertexInputDataType
-{
-	Float1,
-	Float2,
-	Float3,
-	Float4
-};
-
 enum class ObjectType
 {
 	ArrayObject,
 	BufferObject
 };
+
+#endif	//! BUFFERINFO_H

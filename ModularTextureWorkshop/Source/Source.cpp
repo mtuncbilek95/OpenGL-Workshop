@@ -3,14 +3,20 @@
 #pragma region "Libraries"
 
 //	Core Libraries
-#include "../Core/Core.h"
+#include "../Engine/Core/Core.h"
+#include "../Engine/Core/InputValues.h"
 
 //	OpenGL Libraries
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 //	Shader Libraries
-#include "../Shader/Shader.h"
+#include "../Engine/Shader/Shader.h"
+
+//	Buffer Libraries
+#include "../Engine/Buffer/Buffer.h"
+
+//	InputLayout Libraries
 
 #pragma endregion
 
@@ -44,12 +50,13 @@ int main(int argC, char** argV)
 		return 1;
 	}
 
+	BufferBase* VertexBuffer = new BufferBase(Vertices, BufferType::ArrayBuffer);
+	
 	while (!glfwWindowShouldClose(MainWindow))
 	{
 		glfwSwapBuffers(MainWindow);
 		glfwPollEvents();
 	}
 
-	getchar();
 	return 0;
 }
